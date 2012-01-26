@@ -47,7 +47,8 @@ public class Database {
         try {
             return  db.executeQuery(query, modify);
         } catch (SQLException e) {
-            e.printStackTrace();
+            if(!db.connect()) return null;
+            Query(query, modify);
         }
         return null;
     }
