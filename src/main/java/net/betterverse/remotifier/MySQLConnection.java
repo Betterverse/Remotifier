@@ -1,4 +1,4 @@
-package org.blockface.remotifier;
+package net.betterverse.remotifier;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,9 +13,9 @@ import java.util.List;
 /**
  * @author Jesika(Kaitlyn) Tremaine aka JesiKat
  *
- *	MySQLConnection.
- *	This class is a simple database connector with the basic useful methods such as getting the number of rows in a table,
- *  the names of columns in the table, etc.
+ * MySQLConnection.
+ * This class is a simple database connector with the basic useful methods such as getting the number of rows in a table,
+ * the names of columns in the table, etc.
  */
 public class MySQLConnection {
 	/*The host for the database, the username for the database, and the password*/
@@ -25,7 +25,7 @@ public class MySQLConnection {
 	private Connection databaseConnection;
 
 	/**
-	 * 
+	 *
 	 * @param host The host of the database server
 	 * @param port The port that the server is on
 	 * @param database The name of the database to connect to. If left as null, it will connect to the server without
@@ -42,7 +42,7 @@ public class MySQLConnection {
 		}
 	}
 	/**
-	 * 
+	 *
 	 * @param host The host of the database server
 	 * @param port The port that the server is on
 	 * @param username The username for the database
@@ -53,7 +53,7 @@ public class MySQLConnection {
 		return newJDBCConnection(host, port, "", username, password);
 	}
 	/**
-	 * 
+	 *
 	 * @param host The host of the database server
 	 * @param username The username for the database.
 	 * @param password The password for the database
@@ -73,7 +73,9 @@ public class MySQLConnection {
 	/**
 	 * @return True if the connection was made successfully, false if otherwise.
 	 */
-	public boolean connect() { return connect(false); }
+	public boolean connect() {
+		return connect(false);
+	}
 	/**
 	 * @param printerror If this is true, this method will print an error if there is one and return false
 	 * @return True if the connection was made successfully, false if otherwise.
@@ -81,10 +83,14 @@ public class MySQLConnection {
 	public boolean connect(boolean printerror) {
 		try {
 			this.databaseConnection = DriverManager.getConnection("jdbc:mysql://" + this.dbUrl, this.dbUsername, this.dbPassword);
-			if (this.databaseConnection==null) return false;
+			if (this.databaseConnection == null) {
+				return false;
+			}
 			return true;
 		} catch (SQLException e) {
-			if (printerror) e.printStackTrace();
+			if (printerror) {
+				e.printStackTrace();
+			}
 			return false;
 		}
 	}
@@ -102,7 +108,9 @@ public class MySQLConnection {
 			this.databaseConnection.close();
 			return true;
 		} catch (SQLException e) {
-			if (printerror) e.printStackTrace();
+			if (printerror) {
+				e.printStackTrace();
+			}
 			return false;
 		}
 	}
@@ -126,7 +134,7 @@ public class MySQLConnection {
 	/**
 	 * @param database The database to check for existence.
 	 * @return true if the database exists, false if there was an error or the database doesn't exist.
-	 * 
+	 *
 	 * This method looks through the information schema that comes with a MySQL installation and
 	 * checks to see if a certain database exists.
 	 */
@@ -143,7 +151,7 @@ public class MySQLConnection {
 	 * @param database The database to check for the table in.
 	 * @param table The table to check for existence.
 	 * @return true if the table exists, false if there was an error or the database doesn't exist.
-	 * 
+	 *
 	 * This method looks through the information schema that comes with a MySQL installation and checks
 	 * if a certain table exists within a database.
 	 */
@@ -160,7 +168,7 @@ public class MySQLConnection {
 	 * @param database The database the table is in.
 	 * @param table The table to get the row count from.
 	 * @return the number of rows in the table.
-	 * 
+	 *
 	 * This method loops through all rows and returns the row count.
 	 */
 	public int getRowCount(String database, String table) {
@@ -168,7 +176,9 @@ public class MySQLConnection {
 		int rows = 0;
 		try {
 			ResultSet set = executeQuery(format.replace("$DB", database).replace("$TABLE", table), false);
-			while (set.next()) { rows++; }
+			while (set.next()) {
+				rows++;
+			}
 		} catch (SQLException e) {
 			return 0;
 		}
@@ -180,7 +190,7 @@ public class MySQLConnection {
 	 * @param table The table to get the columns from.
 	 * @return A String array containing the names of all the columns from the table in the order they are in in the table.
 	 * @throws SQLException
-	 * 
+	 *
 	 * This method loops through all columns of a table within a database and adds their name to an array, then returns the
 	 * array.
 	 */
@@ -234,8 +244,9 @@ public class MySQLConnection {
 				if (!(database.equalsIgnoreCase("information_schema") || database.equalsIgnoreCase("mysql") || database.equalsIgnoreCase("performance_schema"))) {
 					databases.add(database);
 				}
-			} else 
+			} else {
 				databases.add(database);
+			}
 		}
 		List<String> sorted = Arrays.asList(databases.toArray(new String[databases.size()]));
 		Collections.sort(sorted, String.CASE_INSENSITIVE_ORDER);
@@ -245,6 +256,7 @@ public class MySQLConnection {
 	/**
 	 * @return The raw connection that this class uses for database interactions.
 	 */
-	public Connection getRawConnection() { return this.databaseConnection; }
+	public Connection getRawConnection() {
+		return this.databaseConnection;
+	}
 }
-
