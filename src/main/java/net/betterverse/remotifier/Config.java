@@ -1,8 +1,5 @@
 package net.betterverse.remotifier;
 
-import java.util.HashMap;
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.util.config.Configuration;
 

@@ -2,7 +2,6 @@ package net.betterverse.remotifier;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
 
 import static net.betterverse.remotifier.Config.Options;
 

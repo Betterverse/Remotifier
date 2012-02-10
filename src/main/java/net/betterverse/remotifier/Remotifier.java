@@ -6,8 +6,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.event.Event;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.vexsoftware.votifier.Votifier;
-
 public class Remotifier extends JavaPlugin {
 	public static Remotifier Instance;
 

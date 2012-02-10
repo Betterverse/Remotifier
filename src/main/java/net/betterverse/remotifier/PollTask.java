@@ -2,15 +2,12 @@ package net.betterverse.remotifier;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
-import sun.plugin2.main.server.Plugin;
 
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.ItemStack;
 
 import com.nijikokun.register.payment.Method;
 import com.nijikokun.register.payment.Methods;
-import com.vexsoftware.votifier.Votifier;
 
 import static net.betterverse.remotifier.Config.Options;
 
