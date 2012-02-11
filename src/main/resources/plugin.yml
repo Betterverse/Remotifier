@@ -6,6 +6,7 @@ website: http://www.betterverse.net
 
 main: net.betterverse.remotifier.Remotifier
 softdepend: [Votifier]
+depend: [Vault]
 startup: postworld
 database: false
 

@@ -2,28 +2,20 @@ package net.betterverse.remotifier;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import net.betterverse.remotifier.Config.Options;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.ItemStack;
 
-import com.nijikokun.register.payment.Method;
-import com.nijikokun.register.payment.Methods;
-
-import static net.betterverse.remotifier.Config.Options;
-
 public class PollTask implements Runnable {
-	private Method method;
 
 	public PollTask() {
-		Methods.setMethod(Remotifier.Instance.getServer().getPluginManager());
-		method = Methods.getMethod();
 	}
 
 	public void run() {
 		ResultSet res = Remotifier.Instance.DB.SelectNew();
 		while (Iterate(res)) {
 			String player = GetString(res, "player");
-			method.getAccount(player).add(Options.MONEY.getInt());
+			Remotifier.economy.depositPlayer(player, Options.MONEY.getInt());
 
 			String message = String.format(Options.MESSAGE.getString(), player);
 			Bukkit.getServer().broadcastMessage(message);
@@ -40,16 +32,16 @@ public class PollTask implements Runnable {
 		}
 		try {
 			return set.next();
+		} catch (SQLException ignored) {
 		}
-		catch (SQLException ignored) {}
 		return false;
 	}
 
 	public String GetString(ResultSet set, String key) {
 		try {
 			return set.getString(key);
+		} catch (SQLException ignored) {
 		}
-		catch (SQLException ignored) {}
 		return "";
 	}
 }

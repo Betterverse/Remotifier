@@ -58,10 +58,9 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.nijikokun</groupId>
-			<artifactId>register</artifactId>
-			<version>1.5</version>
-			<scope>compile</scope>
+			<groupId>net.milkbowl</groupId>
+			<artifactId>vault</artifactId>
+			<version>1.2.8-b87</version>
 		</dependency>
 	</dependencies>
 

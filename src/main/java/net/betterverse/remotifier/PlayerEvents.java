@@ -1,24 +1,25 @@
 package net.betterverse.remotifier;
 
 import java.util.Date;
-
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerListener;
 
-public class PlayerEvents extends PlayerListener {
-	@Override
+public class PlayerEvents implements Listener {
+
+	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		long now = new Date().getTime();
 		long lastVote = Remotifier.Instance.DB.LastVote(event.getPlayer().getName());
-		long diff = now-lastVote;
-		if (diff <= 1000*60*60*24) {
+		long diff = now - lastVote;
+		if (diff <= 1000 * 60 * 60 * 24) {
 			return;
 		}
 		lastVote = Remotifier.Instance.DB.LastVoteByIP(event.getPlayer().getAddress().getAddress().getHostAddress());
-		diff = now-lastVote;
-		if (diff <= 1000*60*60*24) {
+		diff = now - lastVote;
+		if (diff <= 1000 * 60 * 60 * 24) {
 			return;
 		}
 		Bukkit.getScheduler().scheduleSyncDelayedTask(Remotifier.Instance, new KickTask(event.getPlayer()), 20L * 60 * Config.Options.KICK.getInt());
@@ -26,6 +27,7 @@ public class PlayerEvents extends PlayerListener {
 	}
 
 	class KickTask implements Runnable {
+
 		private Player _player;
 
 		public KickTask(Player player) {
