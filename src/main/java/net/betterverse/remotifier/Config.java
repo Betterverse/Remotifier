@@ -1,10 +1,10 @@
 package net.betterverse.remotifier;
 
-import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.util.config.Configuration;
+import org.bukkit.configuration.file.FileConfiguration;
+
 
 public class Config {
-	private static Configuration configuration;
+	private static FileConfiguration configuration;
 
 	public enum Options {
 		MYSQL_HOST("mysql.host", "localhost"),
@@ -32,10 +32,10 @@ public class Config {
 		}
 
 		public Object get() {
-			if (configuration.getProperty(path) == null) {
-				configuration.setProperty(path, def);
+			if (configuration.get(path) == null) {
+				configuration.set(path, def);
 			}
-			return configuration.getProperty(path);
+			return configuration.get(path);
 		}
 
 		public String getString() {
@@ -56,10 +56,9 @@ public class Config {
 	}
 
 	public static void Load() {
-		configuration = Remotifier.Instance.getConfiguration();
-		configuration.load();
+		configuration = Remotifier.Instance.getConfig();
 		loadDefaults();
-		configuration.save();
+		Remotifier.Instance.saveConfig();
 	}
 
 	private static void loadDefaults() {

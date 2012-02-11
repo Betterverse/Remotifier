@@ -11,17 +11,7 @@ public class PlayerEvents implements Listener {
 
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
-		long now = new Date().getTime();
-		long lastVote = Remotifier.Instance.DB.LastVote(event.getPlayer().getName());
-		long diff = now - lastVote;
-		if (diff <= 1000 * 60 * 60 * 24) {
-			return;
-		}
-		lastVote = Remotifier.Instance.DB.LastVoteByIP(event.getPlayer().getAddress().getAddress().getHostAddress());
-		diff = now - lastVote;
-		if (diff <= 1000 * 60 * 60 * 24) {
-			return;
-		}
+		if(hasVotedRecently(event.getPlayer())) return;
 		Bukkit.getScheduler().scheduleSyncDelayedTask(Remotifier.Instance, new KickTask(event.getPlayer()), 20L * 60 * Config.Options.KICK.getInt());
 		event.getPlayer().sendMessage(Config.Options.WARN_MSG.getString());
 	}
@@ -35,7 +25,23 @@ public class PlayerEvents implements Listener {
 		}
 
 		public void run() {
+			if(!hasVotedRecently(_player))
 			_player.kickPlayer(Config.Options.KICK_MSG.getString());
 		}
+	}
+	
+	public boolean hasVotedRecently(Player plr) {
+		long now = new Date().getTime();
+		long lastVote = Remotifier.Instance.DB.LastVote(plr.getName());
+		long diff = now - lastVote;
+		if (diff <= 1000 * 60 * 60 * 24) {
+			return true;
+		}
+		lastVote = Remotifier.Instance.DB.LastVoteByIP(plr.getAddress().getAddress().getHostAddress());
+		diff = now - lastVote;
+		if (diff <= 1000 * 60 * 60 * 24) {
+			return true;
+		}
+		return false;
 	}
 }
