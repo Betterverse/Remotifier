@@ -55,12 +55,13 @@
 			<groupId>com.vexsoftware</groupId>
 			<artifactId>votifier</artifactId>
 			<version>1.6</version>
-			<scope>compile</scope>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>net.milkbowl</groupId>
 			<artifactId>vault</artifactId>
 			<version>1.2.8-b87</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 
