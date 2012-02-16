@@ -24,7 +24,6 @@ public class Remotifier extends JavaPlugin {
 		setupEconomy();
 		Instance = this;
 		Config.Load();
-		Votifier.getInstance().getListeners().add(new RemotifierListener());
 		DB = new Database();
 		this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new PollTask(), 20L * 60, 20L * 60);
 		this.getServer().getPluginManager().registerEvents(new PlayerEvents(), this);

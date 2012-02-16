@@ -1,7 +1,6 @@
-package net.betterverse.remotifier;
-
 import com.vexsoftware.votifier.model.Vote;
 import com.vexsoftware.votifier.model.VoteListener;
+import net.betterverse.remotifier.Remotifier;
 
 public class RemotifierListener implements VoteListener {
 	public void voteMade(Vote vote) {
