@@ -32,7 +32,8 @@ public class PlayerEvents implements Listener {
 	
 	public boolean hasVotedRecently(Player plr) {
 		long now = new Date().getTime();
-		long lastVote = Remotifier.Instance.DB.LastVote(plr.getName());
+		long lastVote = Remotifier.Instance.DB.LastVote(plr.getName())*1000;
+		//Database Returns 10 digits whereas gettime is returning 13 digits
 		long diff = now - lastVote;
 		if (diff <= 1000 * 60 * 60 * 24) {
 			return true;
