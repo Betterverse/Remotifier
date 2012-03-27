@@ -16,6 +16,7 @@ public class Config {
 		MONEY("reward.money",1000),
 		ITEM("reward.item",0),
 		ITEM_COUNT("reward.itemCount",0),
+        CREDITS("reward.credits",2),
 		MESSAGE("message","%s just voted!"),
 		KICK("kick.minutes", 1),
 		KICK_MSG("kick.message", "Please vote at xxx url to continue playing"),

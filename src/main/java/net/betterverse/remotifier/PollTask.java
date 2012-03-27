@@ -1,10 +1,12 @@
 package net.betterverse.remotifier;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import net.betterverse.creditsshop.PlayerListener;
 import net.betterverse.remotifier.Config.Options;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.ItemStack;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class PollTask implements Runnable {
 
@@ -17,11 +19,16 @@ public class PollTask implements Runnable {
 			String player = GetString(res, "player");
 			Remotifier.economy.depositPlayer(player, Options.MONEY.getInt());
 
+            if (Remotifier.creditsPlugin && Options.CREDITS.getInt() > 0) {
+                PlayerListener.addCredits(player, Options.CREDITS.getInt());
+            }
+
 			String message = String.format(Options.MESSAGE.getString(), player);
 			Bukkit.getServer().broadcastMessage(message);
 			if (Options.ITEM.getInt() < 1) {
 				continue;
 			}
+
 			Bukkit.getServer().getPlayer(player).getInventory().addItem(new ItemStack(Options.ITEM.getInt(), Options.ITEM_COUNT.getInt()));
 		}
 	}
