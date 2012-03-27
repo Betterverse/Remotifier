@@ -1,16 +1,17 @@
 package net.betterverse.remotifier;
 
-import com.vexsoftware.votifier.Votifier;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Remotifier extends JavaPlugin {
 
 	public static Remotifier Instance;
+    public static boolean creditsPlugin = false;
 	public Database DB;
 	public static Economy economy = null;
 
@@ -27,7 +28,13 @@ public class Remotifier extends JavaPlugin {
 		DB = new Database();
 		this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new PollTask(), 20L * 60, 20L * 60);
 		this.getServer().getPluginManager().registerEvents(new PlayerEvents(), this);
-
+        Plugin check = getServer().getPluginManager().getPlugin("CreditsShop");
+        if (check != null) {
+            creditsPlugin = true;
+        } else {
+            System.out.println(this + " is running without CreditsShop, Credits reward is now disabled!");
+            creditsPlugin = false;
+        }
 		System.out.println(this + " is now enabled!");
 	}
 
