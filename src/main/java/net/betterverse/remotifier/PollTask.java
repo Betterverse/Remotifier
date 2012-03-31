@@ -19,7 +19,7 @@ public class PollTask implements Runnable {
 			String player = GetString(res, "player");
 			Remotifier.economy.depositPlayer(player, Options.MONEY.getInt());
 
-            if (Remotifier.creditsPlugin && Options.CREDITS.getInt() > 0) {
+            if (Remotifier.hasCreditsShop() && Options.CREDITS.getInt() > 0) {
                 PlayerListener.addCredits(player, Options.CREDITS.getInt());
             }
 
