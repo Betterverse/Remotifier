@@ -18,7 +18,6 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<bukkit.version>1.2.4-R0.1-SNAPSHOT</bukkit.version>
 		<build.number>Unknown</build.number>
 	</properties>
 
@@ -37,6 +36,10 @@
 
 	<!-- Repository locations -->
 	<repositories>
+        <repository>
+            <id>bukkit-repo</id>
+            <url>http://repo.bukkit.org/content/groups/public/</url>
+        </repository>
 		<repository>
 			<id>contex-repo</id>
 			<url>http://dl.dropbox.com/u/23444026/repo/</url>
@@ -46,9 +49,9 @@
 	<!-- Dependencies -->
 	<dependencies>
 		<dependency>
-			<groupId>org.bukkit</groupId>
-			<artifactId>bukkit</artifactId>
-			<version>${bukkit.version}</version>
+            <groupId>org.bukkit</groupId>
+            <artifactId>bukkit</artifactId>
+            <version>1.2.4-R1.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
